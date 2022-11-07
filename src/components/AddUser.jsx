@@ -4,27 +4,27 @@ import Card from "./Card";
 import Button from "./Button";
 import ErrorModal from "./ErrorModal";
 import classes from "./AddUser.module.css";
-import Wrapper from './Helpers/Wrapper'
+import Wrapper from "./Helpers/Wrapper";
 
 const AddUser = (props) => {
   const [enteredUsername, setEnteredUsername] = useState("");
   const [enteredAge, setEnteredAge] = useState("");
-  const [error, setError] = useState()
+  const [error, setError] = useState();
 
   const addUserHandler = (event) => {
     event.preventDefault();
     if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
       setError({
         title: "Incorrect Inputs",
-        info: "Please enter a valid name and age."
-      })
+        info: "Please enter a valid name and age.",
+      });
       return;
     }
     if (+enteredAge < 1) {
       setError({
         title: "Incorrect Age Input",
-        info: "Please enter a valid age."
-      })
+        info: "Please enter a valid age.",
+      });
       return;
     }
     props.onAddUser(enteredUsername, enteredAge);
@@ -41,16 +41,18 @@ const AddUser = (props) => {
   };
 
   const errorHandler = () => {
-    setError(null)
-  }
+    setError(null);
+  };
 
   return (
     <Wrapper>
-      {error && <ErrorModal
-        title={error.title}
-        info={error.info}
-        closeError={errorHandler}
-      />}
+      {error && (
+        <ErrorModal
+          title={error.title}
+          info={error.info}
+          closeError={errorHandler}
+        />
+      )}
       <Card className={classes.input}>
         <form onSubmit={addUserHandler}>
           <label htmlFor="username">Username</label>
